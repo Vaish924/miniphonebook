@@ -1,0 +1,150 @@
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+int phonebook();
+int contactlist();
+int thankyou();
+int newcontact();
+
+ typedef struct contact{
+    char name[100],lname[20],number[100],gmail[50];
+}a;
+
+int main(){
+    char password[12];
+    char sai[]="SHARAD";
+
+    printf("\n\n                                ************************* WELCOME ********************************\n\n");
+
+    printf("\t\t\t\t*PASSWORD :");
+
+    scanf("%s",password);
+    
+    if (strcmp(password,sai)==0)
+    {
+    
+        printf("\n                                HI ! SHARAD\n");
+        phonebook();
+    }
+    else{
+        printf("                                BYE!\n  YOU ENTERED WRONG PASSWORD\n");
+    }
+    thankyou();
+    return 0;
+}
+
+    int phonebook()
+    {   int x,input;
+   
+        printf("                                    CHOOSE ACTION: \n\n");
+        printf("                                   1)NEW CONTACT");
+        printf("   2)CONTACT LIST");
+        printf("   3)EXIT\n");
+        printf("\n\n                                   CHOOSE OPTION: ");
+        scanf("%d",&x);
+        printf("\n");
+       
+       
+        switch (x)
+        {
+        case 1:
+                newcontact();
+                break;
+        case 2:
+                contactlist();
+                break;
+ 
+        case 3:
+                return 0;
+        
+        default:
+                printf("                              YOU ENTERED WRONG INPUT\n");
+                 printf("                                FOR REFRESH PRESS ANY KEY\n\n");
+               scanf("%d",&input);
+                phonebook();
+
+       }
+        
+       return 0; 
+    }
+
+     int newcontact()
+     {
+       FILE*ptr;
+
+        ptr=fopen("name.txt","a");
+        int i=1,input;
+
+        a a1[10];
+
+        printf("\n                      ENTER FIRST NAME :");
+        scanf("%s",a1[i].name);
+         fprintf(ptr,"name :%s\n",a1[i].name);
+
+        printf("                      ENTER LAST NAME :");
+        scanf("%s",a1[i].lname);
+        fprintf(ptr,"%s\n",a1[i].lname);
+         printf("\n");
+
+        printf("                      ENTER NUMBER :");
+        scanf("%s",(a1[i].number));
+        fprintf(ptr,"number:%s\n",a1[i].number);
+         printf("\n");
+
+        printf("                      ENTER GMAIL  :");
+        scanf("%s",(a1[i].gmail));
+        fprintf(ptr,"gmail:%s\n\n",a1[i].gmail);
+         printf("\n");
+
+         printf("                           PRESS 1 : TO ENTER ONE MORE CONTACT\n");
+         printf("                     PRESS ANY KEY : TO SAVE AND RETURN TO MENU\n");
+         printf("                              CHOOSE OPTION :");
+
+         scanf("%d",&input);
+         printf("\n");
+
+         if (input==1)
+         {
+            newcontact();
+         }
+         else{
+            phonebook();
+         }
+
+    return 0;
+ }
+
+   int contactlist(){
+    int input;
+    FILE*ptr;
+    ptr=fopen("name.txt","r");
+    char ch=fgetc(ptr);
+  while(ch!=EOF){
+    printf("%c",ch);
+    ch=fgetc(ptr);
+    
+    }
+    fclose(ptr);
+    printf("                    PRESS 1 : TO RETURN MENU\n");
+    printf("                    PRESS ANY KEY :TO EXIT\n");
+    printf("                         CHOOSE OPTION :");
+
+   scanf("%d",&input);
+         printf("\n");
+
+   if(input==1)
+   {
+    phonebook();
+   }
+  
+   
+
+    
+    return 0;
+}
+
+int thankyou(){
+    printf("\n\n\n                          THANK YOU FOR VISITING...............");
+    return 0;
+}
+   
